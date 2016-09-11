@@ -71,6 +71,7 @@ public class Tr2dSegmentationImportPlugin implements Tr2dSegmentationPlugin {
 		this.tr2dModel = model;
 		this.model = new Tr2dImportedSegmentationModel( tr2dModel.getSegmentationModel(), tr2dModel.getSegmentationModel().getProjectFolder() );
 		panel = new Tr2dImportedSegmentationPanel( this.model );
+		log.info( "Tr2dSegmentationImportPlugin is set up." );
 	}
 
 	/**
