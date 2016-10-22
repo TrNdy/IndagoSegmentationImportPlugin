@@ -22,7 +22,6 @@ import com.jgoodies.common.collect.LinkedListModel;
 
 import bdv.util.BdvHandlePanel;
 import bdv.util.BdvSource;
-import io.scif.img.ImgIOException;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.numeric.RealType;
@@ -65,12 +64,8 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 		imgs = new ArrayList< >();
 		files = new Vector< ProjectFile >( projectFolder.getFiles( new ExtensionFileFilter( "tif", "TIFF Image Stack" ) ) );
 		for ( final ProjectFile pf : files ) {
-			try {
-				final RandomAccessibleInterval< IntType > rai = IntTypeImgLoader.loadTiffEnsureType( pf.getFile() );
-				imgs.add( rai );
-			} catch ( final ImgIOException e ) {
-				e.printStackTrace();
-			}
+			final RandomAccessibleInterval< IntType > rai = IntTypeImgLoader.loadTiffEnsureType( pf.getFile() );
+			imgs.add( rai );
 		}
 		linkedListModel = new LinkedListModel< >( getLoadedFiles() );
 	}
@@ -110,7 +105,7 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	 * @throws IOException
 	 * @throws ImgIOException
 	 */
-	public void importSegmentation( final File f ) throws IOException, ImgIOException {
+	public void importSegmentation( final File f ) throws IOException {
 		final ProjectFile pf = projectFolder.addFile( f.getName() );
 		Files.copy( f.toPath(), pf.getFile().toPath() );
 

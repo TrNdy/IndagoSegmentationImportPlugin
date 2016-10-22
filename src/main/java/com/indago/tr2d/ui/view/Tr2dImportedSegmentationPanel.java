@@ -25,7 +25,6 @@ import com.indago.tr2d.ui.util.UniversalFileChooser;
 
 import bdv.util.Bdv;
 import bdv.util.BdvHandlePanel;
-import io.scif.img.ImgIOException;
 import weka.gui.ExtensionFileFilter;
 
 /**
@@ -91,7 +90,7 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 			try {
 				model.importSegmentation( file );
 				listSegmentations.setSelectedIndex( listSegmentations.getModel().getSize() - 1 );
-			} catch ( ImgIOException | IOException e1 ) {
+			} catch ( final IOException e1 ) {
 				Tr2dSegmentationImportPlugin.log.info( "File selection canceled." );
 			}
 		} else if ( e.getSource().equals( remove ) ) {
