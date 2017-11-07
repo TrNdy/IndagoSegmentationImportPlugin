@@ -7,9 +7,9 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.indago.IndagoLog;
+import org.scijava.log.Logger;
 import org.scijava.plugin.Plugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
 import com.indago.tr2d.ui.model.Tr2dModel;
@@ -30,7 +30,7 @@ public class Tr2dSegmentationImportPlugin implements Tr2dSegmentationPlugin {
 	private Tr2dModel tr2dModel;
 	private Tr2dImportedSegmentationModel model;
 
-	public static Logger log = LoggerFactory.getLogger( Tr2dSegmentationImportPlugin.class );
+	public static Logger log = IndagoLog.stderrLogger().subLogger(Tr2dSegmentationImportPlugin.class.getSimpleName());
 
 	/**
 	 * @see com.indago.tr2d.plugins.seg.Tr2dSegmentationPlugin#getInteractionPanel()
@@ -67,11 +67,8 @@ public class Tr2dSegmentationImportPlugin implements Tr2dSegmentationPlugin {
 		return "imported segmentations";
 	}
 
-	/**
-	 * @see com.indago.tr2d.plugins.seg.Tr2dSegmentationPlugin#getLogger()
-	 */
 	@Override
-	public Logger getLogger() {
-		return log;
+	public void setLogger(Logger logger) {
+		log = logger;
 	}
 }
