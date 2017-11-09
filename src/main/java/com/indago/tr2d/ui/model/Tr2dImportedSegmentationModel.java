@@ -46,8 +46,9 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	private final List< BdvSource > bdvSources = new ArrayList< >();
 
 	/**
+	 *
+	 * @param tr2dSegmentationCollectionModel
 	 * @param parentFolder
-	 * @param model2
 	 */
 	public Tr2dImportedSegmentationModel( final Tr2dSegmentationCollectionModel tr2dSegmentationCollectionModel, final ProjectFolder parentFolder ) {
 		this.model = tr2dSegmentationCollectionModel;
@@ -103,7 +104,6 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	 *
 	 * @param f
 	 * @throws IOException
-	 * @throws ImgIOException
 	 */
 	public void importSegmentation( final File f ) throws IOException {
 		final ProjectFile pf = projectFolder.addFile( f.getName() );
@@ -148,7 +148,7 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	}
 
 	/**
-	 * @see com.indago.ui.bdv.BdvOwner#setBdvHandlePanel()
+	 * @see com.indago.ui.bdv.BdvOwner#bdvSetHandlePanel(BdvHandlePanel) 
 	 */
 	@Override
 	public void bdvSetHandlePanel( final BdvHandlePanel bdvHandlePanel ) {
