@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -82,13 +83,15 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 	@Override
 	public void actionPerformed( final ActionEvent e ) {
 		if ( e.getSource().equals( add ) ) {
-			final File file = UniversalFileChooser.showLoadFileChooser(
+			final List< File > files = UniversalFileChooser.showLoadMultipleFilesChooser(
 					this,
 					null,
 					"Choose a sum image tiff file to import...",
 					new ExtensionFileFilter( "tif", "TIFF Image Stack" ) );
 			try {
-				model.importSegmentation( file );
+				for ( final File file : files ) {
+					model.importSegmentation( file );
+				}
 				listSegmentations.setSelectedIndex( listSegmentations.getModel().getSize() - 1 );
 			} catch ( final IOException e1 ) {
 				Tr2dSegmentationImportPlugin.log.info( "File selection canceled." );
