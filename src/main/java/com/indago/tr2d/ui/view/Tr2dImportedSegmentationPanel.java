@@ -40,6 +40,9 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 	private final JList< ProjectFile > listSegmentations;
 	private final JButton add = new JButton( "+" );
 	private final JButton remove = new JButton( "-" );
+	private final JButton selectAll = new JButton("Select All");
+	private final JButton deleteAll = new JButton( "--" );
+	
 
 	public Tr2dImportedSegmentationPanel( final Tr2dImportedSegmentationModel model ) {
 		super( new BorderLayout() );
@@ -67,8 +70,12 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 		final JPanel helper = new JPanel( new FlowLayout( FlowLayout.RIGHT ) );
 		add.addActionListener( this );
 		remove.addActionListener( this );
+		selectAll.addActionListener( this );
+		deleteAll.addActionListener( this );
 		helper.add( add );
 		helper.add( remove );
+		helper.add( selectAll);
+		helper.add( deleteAll );
 		list.add( helper, BorderLayout.SOUTH );
 
 		final JSplitPane splitPane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, list, viewer );
@@ -99,9 +106,27 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 		} else if ( e.getSource().equals( remove ) ) {
 			model.removeSegmentations( listSegmentations.getSelectedIndices() );
 			listSegmentations.clearSelection();
+		} else if (e.getSource().equals(selectAll)) {
+			 selectAllItems();
+		} else if ( e.getSource().equals( deleteAll ) ) {
+			 removeAllItems();
 		}
 	}
 
+	
+
+	private void selectAllItems() {
+		int start = 0;
+		int end = listSegmentations.getModel().getSize()-1;
+		if (end >=0) {
+			listSegmentations.setSelectionInterval(start, end);
+		}
+	}
+
+	private void removeAllItems() {
+		//listSegmentations.clearSelection();
+		model.removeAllSegmentations();
+	}
 	/**
 	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
 	 */

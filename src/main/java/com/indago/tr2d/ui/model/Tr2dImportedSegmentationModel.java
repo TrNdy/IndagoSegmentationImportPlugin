@@ -129,7 +129,17 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 			Tr2dSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
 		}
 	}
-
+    public void removeAllSegmentations() {
+    		for (ProjectFile pf : files) {
+        		if ( !pf.getFile().delete() ) {
+        			Tr2dSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
+        		}
+        		linkedListModel.remove( pf );
+    		}
+    		files.clear();
+    		imgs.clear();
+    		bdvSources.clear();
+    }
 	/**
 	 * @param indices
 	 */
