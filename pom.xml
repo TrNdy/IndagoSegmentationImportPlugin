@@ -18,7 +18,7 @@
 
 	<groupId>com.indago.tr2d</groupId>
 	<artifactId>Tr2dSegmentationImportPlugin</artifactId>
-	<version>0.1.3-SNAPSHOT</version>
+	<version>0.1.4-SNAPSHOT</version>
 
 	<name>Tr2dSegmentationImportPlugin</name>
 	<description>Segmentation plugin for tr2d allowing to load saved segmentations</description>
