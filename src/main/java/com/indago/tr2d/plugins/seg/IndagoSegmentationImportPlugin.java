@@ -12,6 +12,7 @@ import org.scijava.plugin.Plugin;
 
 import com.indago.IndagoLog;
 import com.indago.io.ProjectFolder;
+import com.indago.plugins.seg.IndagoSegmentationPlugin;
 import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
 import com.indago.tr2d.ui.view.Tr2dImportedSegmentationPanel;
 

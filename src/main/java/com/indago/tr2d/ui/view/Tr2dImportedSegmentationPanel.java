@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 import com.indago.io.ProjectFile;
 import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
 import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
-import com.indago.tr2d.ui.util.UniversalFileChooser;
+import com.indago.ui.util.UniversalFileChooser;
 
 import bdv.util.Bdv;
 import bdv.util.BdvHandlePanel;
