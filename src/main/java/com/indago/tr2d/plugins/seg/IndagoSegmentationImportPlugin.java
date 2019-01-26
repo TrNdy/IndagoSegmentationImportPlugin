@@ -13,9 +13,10 @@ import org.scijava.plugin.Plugin;
 import com.indago.IndagoLog;
 import com.indago.io.ProjectFolder;
 import com.indago.plugins.seg.IndagoSegmentationPlugin;
-import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
-import com.indago.tr2d.ui.view.Tr2dImportedSegmentationPanel;
+import com.indago.tr2d.ui.model.IndagoImportedSegmentationModel;
+import com.indago.tr2d.ui.view.IndagoImportedSegmentationPanel;
 
+import net.imagej.ImgPlus;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.integer.IntType;
 import net.imglib2.type.numeric.real.DoubleType;
@@ -29,7 +30,7 @@ public class IndagoSegmentationImportPlugin implements IndagoSegmentationPlugin 
 	JPanel panel = null;
 
 	private ProjectFolder projectFolder;
-	private Tr2dImportedSegmentationModel model;
+	private IndagoImportedSegmentationModel model;
 
 	public static Logger log = IndagoLog.stderrLogger().subLogger(IndagoSegmentationImportPlugin.class.getSimpleName());
 
@@ -44,10 +45,10 @@ public class IndagoSegmentationImportPlugin implements IndagoSegmentationPlugin 
 	}
 
 	@Override
-	public void setProjectFolderAndData( final ProjectFolder projectFolder, final RandomAccessibleInterval< DoubleType > rawData ) {
+	public void setProjectFolderAndData( final ProjectFolder projectFolder, final ImgPlus< DoubleType > rawData ) {
 		this.projectFolder = projectFolder;
-		this.model = new Tr2dImportedSegmentationModel( projectFolder, rawData );
-		panel = new Tr2dImportedSegmentationPanel( this.model );
+		this.model = new IndagoImportedSegmentationModel( projectFolder, rawData );
+		panel = new IndagoImportedSegmentationPanel( this.model );
 		log.info( "Tr2dSegmentationImportPlugin is set up." );
 	}
 

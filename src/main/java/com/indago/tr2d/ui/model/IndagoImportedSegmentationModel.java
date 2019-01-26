@@ -22,6 +22,7 @@ import com.jgoodies.common.collect.LinkedListModel;
 
 import bdv.util.BdvHandlePanel;
 import bdv.util.BdvSource;
+import net.imagej.ImgPlus;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.numeric.RealType;
@@ -32,7 +33,7 @@ import weka.gui.ExtensionFileFilter;
 /**
  * @author jug
  */
-public class Tr2dImportedSegmentationModel implements BdvOwner {
+public class IndagoImportedSegmentationModel implements BdvOwner {
 
 	private ProjectFolder projectFolder;
 	private final RandomAccessibleInterval< DoubleType > rawData;
@@ -45,7 +46,7 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	private BdvHandlePanel bdvHandlePanel;
 	private final List< BdvSource > bdvSources = new ArrayList< >();
 
-	public Tr2dImportedSegmentationModel( final ProjectFolder parentFolder, final RandomAccessibleInterval< DoubleType > rawData ) {
+	public IndagoImportedSegmentationModel( final ProjectFolder parentFolder, final ImgPlus< DoubleType > rawData ) {
 		this.projectFolder = projectFolder;
 		this.rawData = rawData;
 

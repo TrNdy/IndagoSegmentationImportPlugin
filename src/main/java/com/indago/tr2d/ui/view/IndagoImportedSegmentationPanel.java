@@ -21,7 +21,7 @@ import javax.swing.event.ListSelectionListener;
 
 import com.indago.io.ProjectFile;
 import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
-import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
+import com.indago.tr2d.ui.model.IndagoImportedSegmentationModel;
 import com.indago.ui.util.UniversalFileChooser;
 
 import bdv.util.Bdv;
@@ -31,11 +31,11 @@ import weka.gui.ExtensionFileFilter;
 /**
  * @author jug
  */
-public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListener, ListSelectionListener {
+public class IndagoImportedSegmentationPanel extends JPanel implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = -4610859107829248753L;
 
-	private final Tr2dImportedSegmentationModel model;
+	private final IndagoImportedSegmentationModel model;
 
 	private final JList< ProjectFile > listSegmentations;
 	private final JButton add = new JButton( "+" );
@@ -44,7 +44,7 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 	private final JButton deleteAll = new JButton( "--" );
 
 
-	public Tr2dImportedSegmentationPanel( final Tr2dImportedSegmentationModel model ) {
+	public IndagoImportedSegmentationPanel( final IndagoImportedSegmentationModel model ) {
 		super( new BorderLayout() );
 		this.model = model;
 		listSegmentations = new JList< ProjectFile >( model.getListModel() );
