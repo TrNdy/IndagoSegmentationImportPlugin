@@ -32,7 +32,7 @@ public class IndagoSegmentationImportPlugin implements IndagoSegmentationPlugin 
 	private ProjectFolder projectFolder;
 	private IndagoImportedSegmentationModel model;
 
-	public static Logger log = IndagoLog.stderrLogger().subLogger(IndagoSegmentationImportPlugin.class.getSimpleName());
+	public static Logger log = IndagoLog.log.subLogger( IndagoSegmentationImportPlugin.class.getSimpleName() );
 
 	@Override
 	public JPanel getInteractionPanel() {
