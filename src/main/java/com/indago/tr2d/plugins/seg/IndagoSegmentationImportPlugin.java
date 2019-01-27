@@ -49,7 +49,7 @@ public class IndagoSegmentationImportPlugin implements IndagoSegmentationPlugin 
 		this.projectFolder = projectFolder;
 		this.model = new IndagoImportedSegmentationModel( projectFolder, rawData );
 		panel = new IndagoImportedSegmentationPanel( this.model );
-		log.info( "Tr2dSegmentationImportPlugin is set up." );
+		log.info( "IndagoSegmentationImportPlugin is set up." );
 	}
 
 	@Override
