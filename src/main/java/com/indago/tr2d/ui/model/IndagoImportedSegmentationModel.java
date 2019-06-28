@@ -78,9 +78,7 @@ public class IndagoImportedSegmentationModel implements BdvOwner {
 	}
 
 	public < T extends RealType< T > & NativeType< T > > int getRawDataSpatialDimensions() {
-		ImgPlus< DoubleType > imgPlus = new ImgPlus<>( rawData );
-		ImglibUtil.getNumberOfSpatialDimensions( imgPlus );
-		return rawData.numDimensions();
+		return ImglibUtil.getNumberOfSpatialDimensions( ( ImgPlus< T > ) rawData );
 	}
 
 	/**
