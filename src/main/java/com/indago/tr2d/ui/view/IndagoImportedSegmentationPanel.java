@@ -20,9 +20,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import com.indago.io.ProjectFile;
-import com.indago.tr2d.plugins.seg.Tr2dSegmentationImportPlugin;
-import com.indago.tr2d.ui.model.Tr2dImportedSegmentationModel;
-import com.indago.tr2d.ui.util.UniversalFileChooser;
+import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
+import com.indago.tr2d.ui.model.IndagoImportedSegmentationModel;
+import com.indago.ui.util.UniversalFileChooser;
 
 import bdv.util.Bdv;
 import bdv.util.BdvHandlePanel;
@@ -31,20 +31,20 @@ import weka.gui.ExtensionFileFilter;
 /**
  * @author jug
  */
-public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListener, ListSelectionListener {
+public class IndagoImportedSegmentationPanel extends JPanel implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = -4610859107829248753L;
 
-	private final Tr2dImportedSegmentationModel model;
+	private final IndagoImportedSegmentationModel model;
 
 	private final JList< ProjectFile > listSegmentations;
 	private final JButton add = new JButton( "+" );
 	private final JButton remove = new JButton( "-" );
 	private final JButton selectAll = new JButton("Select All");
 	private final JButton deleteAll = new JButton( "--" );
-	
 
-	public Tr2dImportedSegmentationPanel( final Tr2dImportedSegmentationModel model ) {
+
+	public IndagoImportedSegmentationPanel( final IndagoImportedSegmentationModel model ) {
 		super( new BorderLayout() );
 		this.model = model;
 		listSegmentations = new JList< ProjectFile >( model.getListModel() );
@@ -60,8 +60,7 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 		model.bdvSetHandlePanel(
 				new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(), Bdv
 						.options()
-						.is2D()
-						.inputTriggerConfig( model.getModel().getModel().getDefaultInputTriggerConfig() ) ) );
+						.is2D() ) );
 		viewer.add( model.bdvGetHandlePanel().getViewerPanel(), BorderLayout.CENTER );
 
 		final JPanel list = new JPanel( new BorderLayout() );
@@ -101,7 +100,7 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 				}
 				listSegmentations.setSelectedIndex( listSegmentations.getModel().getSize() - 1 );
 			} catch ( final IOException e1 ) {
-				Tr2dSegmentationImportPlugin.log.info( "File selection canceled." );
+				IndagoSegmentationImportPlugin.log.info( "File selection canceled." );
 			}
 		} else if ( e.getSource().equals( remove ) ) {
 			model.removeSegmentations( listSegmentations.getSelectedIndices() );
@@ -113,11 +112,11 @@ public class Tr2dImportedSegmentationPanel extends JPanel implements ActionListe
 		}
 	}
 
-	
+
 
 	private void selectAllItems() {
-		int start = 0;
-		int end = listSegmentations.getModel().getSize()-1;
+		final int start = 0;
+		final int end = listSegmentations.getModel().getSize()-1;
 		if (end >=0) {
 			listSegmentations.setSelectionInterval(start, end);
 		}

@@ -16,26 +16,27 @@ import javax.swing.ListModel;
 import com.indago.io.IntTypeImgLoader;
 import com.indago.io.ProjectFile;
 import com.indago.io.ProjectFolder;
-import com.indago.tr2d.plugins.seg.Tr2dSegmentationImportPlugin;
+import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
 import com.indago.ui.bdv.BdvOwner;
 import com.jgoodies.common.collect.LinkedListModel;
 
 import bdv.util.BdvHandlePanel;
 import bdv.util.BdvSource;
+import net.imagej.ImgPlus;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.numeric.RealType;
 import net.imglib2.type.numeric.integer.IntType;
+import net.imglib2.type.numeric.real.DoubleType;
 import weka.gui.ExtensionFileFilter;
 
 /**
  * @author jug
  */
-public class Tr2dImportedSegmentationModel implements BdvOwner {
-
-	private final Tr2dSegmentationCollectionModel model;
+public class IndagoImportedSegmentationModel implements BdvOwner {
 
 	private ProjectFolder projectFolder;
+	private final RandomAccessibleInterval< DoubleType > rawData;
 
 	private final Vector< ProjectFile > files;
 	private final List< RandomAccessibleInterval< IntType > > imgs;
@@ -45,20 +46,16 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	private BdvHandlePanel bdvHandlePanel;
 	private final List< BdvSource > bdvSources = new ArrayList< >();
 
-	/**
-	 *
-	 * @param tr2dSegmentationCollectionModel
-	 * @param parentFolder
-	 */
-	public Tr2dImportedSegmentationModel( final Tr2dSegmentationCollectionModel tr2dSegmentationCollectionModel, final ProjectFolder parentFolder ) {
-		this.model = tr2dSegmentationCollectionModel;
+	public IndagoImportedSegmentationModel( final ProjectFolder parentFolder, final ImgPlus< DoubleType > rawData ) {
+		this.projectFolder = projectFolder;
+		this.rawData = rawData;
 
 		try {
 			this.projectFolder = parentFolder.addFolder( "imported" );
 			this.projectFolder.loadFiles();
 		} catch ( final IOException e ) {
 			this.projectFolder = null;
-			Tr2dSegmentationImportPlugin.log.error( "Subfolder for imported segmentation hypotheses could not be created." );
+			IndagoSegmentationImportPlugin.log.error( "Subfolder for imported segmentation hypotheses could not be created." );
 			e.printStackTrace();
 		}
 
@@ -83,13 +80,6 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	 */
 	public ProjectFolder getProjectFolder() {
 		return projectFolder;
-	}
-
-	/**
-	 * @return
-	 */
-	public Tr2dSegmentationCollectionModel getModel() {
-		return model;
 	}
 
 	/**
@@ -126,13 +116,13 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 		linkedListModel.remove( pf );
 
 		if ( !pf.getFile().delete() ) {
-			Tr2dSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
+			IndagoSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
 		}
 	}
     public void removeAllSegmentations() {
-    		for (ProjectFile pf : files) {
+    		for (final ProjectFile pf : files) {
         		if ( !pf.getFile().delete() ) {
-        			Tr2dSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
+        			IndagoSegmentationImportPlugin.log.error( String.format( "Imported segmentation file %s could not be deleted from project folder.", pf ) );
         		}
         		linkedListModel.remove( pf );
     		}
@@ -158,7 +148,7 @@ public class Tr2dImportedSegmentationModel implements BdvOwner {
 	}
 
 	/**
-	 * @see com.indago.ui.bdv.BdvOwner#bdvSetHandlePanel(BdvHandlePanel) 
+	 * @see com.indago.ui.bdv.BdvOwner#bdvSetHandlePanel(BdvHandlePanel)
 	 */
 	@Override
 	public void bdvSetHandlePanel( final BdvHandlePanel bdvHandlePanel ) {
