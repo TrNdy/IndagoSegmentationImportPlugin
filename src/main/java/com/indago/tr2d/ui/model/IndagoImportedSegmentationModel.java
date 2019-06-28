@@ -38,7 +38,6 @@ import weka.gui.ExtensionFileFilter;
 public class IndagoImportedSegmentationModel implements BdvOwner {
 
 	private ProjectFolder projectFolder;
-//	private final RandomAccessibleInterval< DoubleType > rawData;
 	private final Img< DoubleType > rawData;
 
 	private final Vector< ProjectFile > files;
