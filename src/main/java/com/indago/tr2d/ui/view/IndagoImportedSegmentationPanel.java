@@ -57,10 +57,18 @@ public class IndagoImportedSegmentationPanel extends JPanel implements ActionLis
 
 	private void buildGui() {
 		final JPanel viewer = new JPanel( new BorderLayout() );
-		model.bdvSetHandlePanel(
-				new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(), Bdv
-						.options()
-						.is2D() ) );
+		if ( model.getRawDataSpatialDimensions() == 2 ) {
+			model.bdvSetHandlePanel(
+					new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(), Bdv
+							.options()
+							.is2D() ) );
+		} else if ( model.getRawDataSpatialDimensions() == 3 ) {
+			model.bdvSetHandlePanel(
+					new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(), Bdv
+							.options() ) );
+		}
+
+
 		viewer.add( model.bdvGetHandlePanel().getViewerPanel(), BorderLayout.CENTER );
 
 		final JPanel list = new JPanel( new BorderLayout() );
