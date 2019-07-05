@@ -19,6 +19,7 @@ import javax.swing.JSplitPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import bdv.util.BdvOptions;
 import com.indago.io.ProjectFile;
 import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
 import com.indago.tr2d.ui.model.IndagoImportedSegmentationModel;
@@ -57,10 +58,12 @@ public class IndagoImportedSegmentationPanel extends JPanel implements ActionLis
 
 	private void buildGui() {
 		final JPanel viewer = new JPanel( new BorderLayout() );
+		boolean is2D = model.getRawDataSpatialDimensions() == 2;
+		BdvOptions options = is2D ? Bdv.options().is2D() : BdvOptions.options();
 		model.bdvSetHandlePanel(
-				new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(), Bdv
-						.options()
-						.is2D() ) );
+				new BdvHandlePanel( ( Frame ) this.getTopLevelAncestor(),
+						options) );
+
 		viewer.add( model.bdvGetHandlePanel().getViewerPanel(), BorderLayout.CENTER );
 
 		final JPanel list = new JPanel( new BorderLayout() );

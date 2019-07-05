@@ -18,6 +18,7 @@ import com.indago.io.ProjectFile;
 import com.indago.io.ProjectFolder;
 import com.indago.tr2d.plugins.seg.IndagoSegmentationImportPlugin;
 import com.indago.ui.bdv.BdvOwner;
+import com.indago.util.ImglibUtil;
 import com.jgoodies.common.collect.LinkedListModel;
 
 import bdv.util.BdvHandlePanel;
@@ -36,7 +37,7 @@ import weka.gui.ExtensionFileFilter;
 public class IndagoImportedSegmentationModel implements BdvOwner {
 
 	private ProjectFolder projectFolder;
-	private final RandomAccessibleInterval< DoubleType > rawData;
+	private final ImgPlus< DoubleType > rawData;
 
 	private final Vector< ProjectFile > files;
 	private final List< RandomAccessibleInterval< IntType > > imgs;
@@ -73,6 +74,10 @@ public class IndagoImportedSegmentationModel implements BdvOwner {
 	 */
 	public List< RandomAccessibleInterval< IntType > > getSegmentHypothesesImages() {
 		return imgs;
+	}
+
+	public int getRawDataSpatialDimensions() {
+		return ImglibUtil.getNumberOfSpatialDimensions( rawData );
 	}
 
 	/**
