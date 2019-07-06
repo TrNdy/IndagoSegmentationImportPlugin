@@ -19,7 +19,7 @@
 
 	<groupId>com.indago</groupId>
 	<artifactId>IndagoSegmentationImportPlugin</artifactId>
-	<version>0.1.5-SNAPSHOT</version>
+	<version>0.1.5</version>
 
 	<name>IndagoSegmentationImportPlugin</name>
 	<description>Segmentation plugin for Indago projects, allowing to load saved segmentations</description>
@@ -82,7 +82,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/TrNdy/Tr2dSegmentationImportPlugin</connection>
 		<developerConnection>scm:git:git@github.com:TrNdy/Tr2dSegmentationImportPlugin</developerConnection>
-		<tag>HEAD</tag>
+		<tag>IndagoSegmentationImportPlugin-0.1.5</tag>
 		<url>https://github.com/TrNdy/Tr2dSegmentationImportPlugin</url>
 	</scm>
 	<issueManagement>
